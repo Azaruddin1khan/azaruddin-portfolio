@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Smartphone, Layers, Zap } from "lucide-react";
+import { Smartphone, Layers, Zap, GraduationCap } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 
 export function About() {
@@ -19,7 +19,7 @@ export function About() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, amount: 0.1 }}
         className="w-full max-w-[1800px] mx-auto px-4 md:px-6 lg:px-10"
       >
         {/* Giant Section Heading */}
@@ -68,6 +68,35 @@ export function About() {
                 <span className="text-xs font-semibold text-[var(--fg)]">Clean Architecture</span>
               </div>
             </div>
+
+            {/* Academic Education Card */}
+            {about.education && (
+              <div className="mt-4 p-4 rounded-xl bg-[var(--fg)]/[0.025] border border-[var(--border)] hover:border-[var(--border-strong)] transition-all duration-300 group">
+                <div className="flex items-start gap-3.5">
+                  <div className="p-2.5 rounded-lg bg-[var(--fg)]/[0.05] border border-[var(--border)] text-[var(--fg)] shrink-0 mt-0.5 group-hover:bg-[var(--fg)] group-hover:text-[var(--bg)] transition-colors duration-300">
+                    <GraduationCap size={18} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">
+                        Education & Qualification
+                      </span>
+                      <span className="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        Graduate
+                      </span>
+                    </div>
+                    <h4 className="text-sm md:text-base font-bold text-[var(--fg)] mt-1 tracking-tight">
+                      {about.education.degree}
+                    </h4>
+                    <p className="text-xs text-[var(--muted)] mt-1 flex flex-wrap items-center gap-1.5 font-medium">
+                      <span>{about.education.institution}</span>
+                      <span className="inline-block w-1 h-1 rounded-full bg-[var(--muted)]" />
+                      <span>{about.education.location}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right Column: Bio Narrative & Core Philosophy */}

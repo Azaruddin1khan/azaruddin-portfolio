@@ -88,6 +88,11 @@ export const PORTFOLIO_DATA = {
       "1M+ downloads",
       "Google Play",
     ],
+    education: {
+      degree: "Bachelor of Computer Applications (BCA)",
+      institution: "University of Technology (UOT)",
+      location: "Jaipur, Rajasthan",
+    },
   },
 
   experience: [

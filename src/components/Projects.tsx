@@ -36,7 +36,7 @@ export function Projects() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, amount: 0.1 }}
         className="max-w-[1800px] w-full px-4 md:px-6 lg:px-10"
       >
         {/* Giant Section Heading inspired by adinaa.me */}

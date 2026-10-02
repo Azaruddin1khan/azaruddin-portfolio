@@ -12,37 +12,11 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  const titleY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.2]);
 
   const firstName = PORTFOLIO_DATA.owner.headlineFirst; // AZARUDDIN
   const lastName = PORTFOLIO_DATA.owner.headlineLast; // KHAN
-
-  const letterContainerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.04,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const letterVariants = {
-    hidden: { y: "120%", opacity: 0, rotateZ: 6, scale: 0.8 },
-    show: {
-      y: "0%",
-      opacity: 1,
-      rotateZ: 0,
-      scale: 1,
-      transition: {
-        duration: 1.1,
-        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-      },
-    },
-  };
 
   return (
     <section
@@ -51,117 +25,57 @@ export function Hero() {
       className="relative w-full bg-[var(--bg)] pt-28 md:pt-40 pb-16 md:pb-24 overflow-hidden text-[var(--fg)] flex flex-col items-center"
       style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
     >
-      {/* Ambient background aura inspired by adinaa.me */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
-        className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] max-w-[850px] max-h-[850px] bg-[var(--fg)]/[0.04] rounded-full blur-[110px] pointer-events-none z-0"
-      />
+      {/* Ambient background aura */}
+      <div className="absolute top-[15%] left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] max-w-[850px] max-h-[850px] bg-[var(--fg)]/[0.04] rounded-full blur-[110px] pointer-events-none z-0" />
 
       <div className="w-full max-w-[1800px] mx-auto px-4 md:px-6 lg:px-10 relative z-10 flex flex-col items-center">
         {/* Massive Editorial Hero Headline */}
         <motion.div
-          style={{ y: titleY, opacity: titleOpacity, scale: titleScale }}
-          className="w-full flex flex-col items-center perspective-[1000px] select-none"
+          style={{ y: titleY, opacity: titleOpacity }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex flex-col items-center select-none"
         >
           {/* First Name: AZARUDDIN */}
-          <motion.h1
-            variants={letterContainerVariants}
-            initial="hidden"
-            animate="show"
-            className="text-[12vw] sm:text-[10vw] md:text-[8.5vw] lg:text-[7.5vw] xl:text-[130px] 2xl:text-[150px] font-bold text-[var(--fg)] tracking-[-0.04em] leading-[0.85] text-center w-full m-0 uppercase whitespace-nowrap flex justify-center"
-          >
-            {firstName.split("").map((letter, index) => (
-              <span
-                key={`first-${index}`}
-                className="overflow-hidden inline-block relative px-[1px] md:px-[4px]"
-              >
-                <motion.span
-                  variants={letterVariants}
-                  className="inline-block origin-bottom"
-                >
-                  {letter}
-                </motion.span>
-              </span>
-            ))}
-          </motion.h1>
+          <h1 className="text-[12vw] sm:text-[10vw] md:text-[8.5vw] lg:text-[7.5vw] xl:text-[130px] 2xl:text-[150px] font-bold text-[var(--fg)] tracking-[-0.04em] leading-[0.85] text-center w-full m-0 uppercase whitespace-nowrap flex justify-center">
+            {firstName}
+          </h1>
 
           {/* Last Name: KHAN */}
-          <motion.div
-            variants={letterContainerVariants}
-            initial="hidden"
-            animate="show"
-            className="text-[12vw] sm:text-[10vw] md:text-[8.5vw] lg:text-[7.5vw] xl:text-[130px] 2xl:text-[150px] font-bold text-[var(--fg)] tracking-[-0.04em] leading-[0.85] text-center w-full m-0 uppercase whitespace-nowrap flex justify-center mt-1 md:mt-2"
-          >
-            {lastName.split("").map((letter, index) => (
-              <span
-                key={`last-${index}`}
-                className="overflow-hidden inline-block relative px-[1px] md:px-[4px]"
-              >
-                <motion.span
-                  variants={letterVariants}
-                  className="inline-block origin-bottom"
-                >
-                  {letter}
-                </motion.span>
-              </span>
-            ))}
-          </motion.div>
+          <div className="text-[12vw] sm:text-[10vw] md:text-[8.5vw] lg:text-[7.5vw] xl:text-[130px] 2xl:text-[150px] font-bold text-[var(--fg)] tracking-[-0.04em] leading-[0.85] text-center w-full m-0 uppercase whitespace-nowrap flex justify-center mt-1 md:mt-2">
+            {lastName}
+          </div>
         </motion.div>
 
         {/* 3-Column Editorial Sub-bar directly below Name */}
         <motion.div
-          initial="hidden"
-          animate="show"
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: { staggerChildren: 0.15, delayChildren: 0.7 },
-            },
-          }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           className="w-full flex flex-row justify-between items-start border-t border-[var(--border-strong)] pt-4 mt-8 md:mt-14 text-[9px] sm:text-[11px] md:text-xs font-medium tracking-wide uppercase"
         >
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-            }}
-            className="flex flex-col text-left w-1/3 pr-1"
-          >
+          <div className="flex flex-col text-left w-1/3 pr-1">
             <span className="text-[var(--fg)] font-semibold">Flutter Developer &</span>
             <span className="text-[var(--muted)]">Mobile App Engineer</span>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-            }}
-            className="flex flex-col text-center w-1/3 px-1"
-          >
+          <div className="flex flex-col text-center w-1/3 px-1">
             <span className="text-[var(--fg)] font-semibold">Based in</span>
             <span className="text-[var(--muted)]">Jaipur, India</span>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-            }}
-            className="flex flex-col text-right w-1/3 pl-1"
-          >
+          <div className="flex flex-col text-right w-1/3 pl-1">
             <span className="text-[var(--fg)] font-semibold">3+ Years</span>
             <span className="text-[var(--muted)]">Production Experience</span>
-          </motion.div>
+          </div>
         </motion.div>
 
         {/* Editorial Introduction statement */}
         <motion.div
-          initial={{ y: 35, opacity: 0, filter: "blur(8px)" }}
-          animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1.1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ y: 15, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="mt-14 md:mt-24 max-w-4xl text-center px-2 sm:px-4"
         >
           <p className="text-[20px] sm:text-2xl md:text-4xl lg:text-[42px] font-semibold md:font-medium leading-[1.2] tracking-[-0.02em] text-[var(--fg)]">
@@ -182,9 +96,9 @@ export function Hero() {
 
         {/* Action Controls & Availability Pill */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
+          initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 1.1, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
           className="mt-10 md:mt-14 flex flex-col sm:flex-row items-center gap-6 sm:gap-10"
         >
           {/* Status Badge */}
@@ -226,9 +140,9 @@ export function Hero() {
 
         {/* Key Statistics Strip */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.3, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
           className="mt-14 md:mt-20 w-full max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 pt-8 border-t border-[var(--border)]"
         >
           {PORTFOLIO_DATA.hero.stats.map((stat, idx) => (
@@ -250,7 +164,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
+          transition={{ delay: 0.55, duration: 0.6 }}
           className="mt-12 flex flex-col items-center gap-2"
         >
           <a
